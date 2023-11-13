@@ -63,4 +63,3 @@ public class ConstraintSatisfaction<V, D> {
         return this.constraints.get(variable).stream().allMatch(c -> c.isSatisfied(localState));
     }
 }
-

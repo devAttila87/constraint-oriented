@@ -5,7 +5,9 @@ import de.leidenheit.core.ConstraintSatisfaction;
 import de.leidenheit.core.constraint.CityColourConstraint;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +27,7 @@ import java.util.logging.Logger;
         |            \
         |             \
         |              \
-        Leipzig(G)------Dresden(B)------Riesa(R)
+        Leipzig(G)------Dresden(B)------Riesa(G)
         |               /\              |
         |              /  \             |
         |             /    \            |
@@ -35,7 +37,7 @@ import java.util.logging.Logger;
         |         /            \        |
         |        /              \       |
         |       /                \      |
-        Chemnitz(R)               Zittau(G)
+        Chemnitz(R)               Zittau(R)
      */
 
 public class Main {
@@ -50,7 +52,8 @@ public class Main {
 
     public static void main(String[] args) {
         // variables
-        final var cities = List.of(BERLIN, DRESDEN, LEIPZIG, RIESA, CHEMNITZ,ZITTAU);
+        final var cities = new ArrayList<>(List.of(BERLIN, DRESDEN, LEIPZIG, RIESA, CHEMNITZ, ZITTAU));
+        Collections.shuffle(cities);
 
         // domain
         final var domains = new HashMap<String, List<Colour>>();
@@ -59,7 +62,7 @@ public class Main {
         }
 
         // constraints
-        final var cs = new ConstraintSatisfaction<String, Colour>(cities, domains);
+        final var cs = new ConstraintSatisfaction<>(cities, domains);
         cs.addConstraint(new CityColourConstraint(BERLIN, DRESDEN));
         cs.addConstraint(new CityColourConstraint(DRESDEN, LEIPZIG));
         cs.addConstraint(new CityColourConstraint(LEIPZIG, BERLIN));

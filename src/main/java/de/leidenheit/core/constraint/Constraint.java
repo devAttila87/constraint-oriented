@@ -12,9 +12,9 @@ public abstract class Constraint<V, D> {
         this.variables = variables;
     }
 
-    public abstract boolean isSatisfied(Map<V, D> state);
-
     public List<V> getVariables() {
         return variables;
     }
+
+    public abstract boolean isSatisfied(Map<V, D> state);
 }
